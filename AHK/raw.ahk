@@ -1,27 +1,23 @@
 ; ------------------------------默认变量------------------------------
-f_1 := "D:/2Scripts/AHK/shortcut/F1/"
-f_2 := "D:/2Scripts/AHK/shortcut/F2/"
-f_3 := "D:/2Scripts/AHK/shortcut/F3/"
-f_4 := "D:/2Scripts/AHK/shortcut/F4/"
 ; ------------------------------一些全局快捷键------------------------------
 ; 切换模式------------------------------
 ^!1::
-    Run D:/2scripts/AHK/default.ahk
+    Run *RunAs .\default.ahk
 ExitApp
 Return
-^!0::Run D:/2scripts/AHK/game.ahk
+^!0::Run .\game.ahk
 ; 重新加载脚本------------------------------
 ^!R::Reload
-; 快捷打开------------------------------
 ; 热字串------------------------------
 ; 当前时间
-::nnow::
+::/now::
     FormatTime, CurrentDateTime,, yyy-MM-dd HH:mm:ss
     Send %CurrentDateTime%
 return
 ; 一些信息
 ::/p2::17820488502
 ::/ahj::honji5022@hotmail.com
+::/azc::zc_001@hotmail.com
 ::/aq1::2840994755@qq.com
 ::/aq2::1423293579@qq.com
 
@@ -90,6 +86,10 @@ Return
 
 #IfWinActive
 ; 迅雷/Motrix-Motrix.exe------------------------------
+#IfWinActive, ahk_exe Motrix.exe
+    ::zz::magnet:?xt=urn:btih:
+
+#IfWinActive
 
 ; honeyview------------------------------
 #IfWinActive, ahk_exe Honeyview.exe
@@ -141,54 +141,30 @@ MouseIsOver(WinTitle) {
     Gui, Destroy
 return
 ; ------------------------------快捷打开程序------------------------------
-; F1--------------------------------------------------
-F1::F1
-F1 & b:: ; 回收站
-Run ::{645ff040-5081-101b-9f08-00aa002f954e}
-Return
-F1 & c::Run %f_1%ClashForWindows
-F1 & f::Run %f_1%FastGitHub
-F1 & g::Run %f_1%gaoman
-F1 & h:: ; 刷新host
-Run, cmd.exe
-Sleep, 5000
-ControlSendRaw, ,ipconfig /flushdns , ahk_exe cmd.exe
-Sleep, 500
-ControlSend, , {Enter} , ahk_exe cmd.exe
-Sleep, 500
-Process, Close, cmd.exe
-Return
-F1 & s::Run %f_1%steamcommunity
-; F2--------------------------------------------------
-F2::F2
-F2 & a::Run %f_2%AI
-F2 & b::Run %f_2%Billfish
-F2 & e::Run %f_2%edge
-F2 & f::Run %f_2%firefox
-F2 & g::Run %f_2%google
-F2 & j::Run %f_2%Joplin
-F2 & o::Run %f_2%oulu
-F2 & p::Run %f_2%ps
-F2 & q::Run %f_2%QQ
-F2 & v::Run %f_2%vscode
-F2 & w::Run %f_2%wechat
-; F3--------------------------------------------------
-F3::F3
-F3 & a::Run %f_3%apex
-F3 & l::Run %f_3%leidian
-F3 & s::Run %f_3%steam
-F3 & w::Run %f_3%wangyi
-; F4--------------------------------------------------
-F4::F4
-F4 & a::Run %f_4%ali
-F4 & b::Run %f_4%baiduyun
-F4 & e::Run %f_4%Everything
-F4 & g::Run %f_4%geshigongchang
-F4 & m::Run %f_4%Motrix
-F4 & p::Run %f_4%pr
-F4 & x::Run %f_4%xunlei
-; F5--------------------------------------------------
-F5::F5
-F5 & b::Run https://bilibili.com
-F5 & g::Run https://github.com
-F5 & z::Run https://zhihu.com
+#IfWinActive, ahk_exe SearchApp.exe
+    ; F1--------------------------------------------------
+    1::1
+    1 & b:: ; 回收站
+    Run ::{645ff040-5081-101b-9f08-00aa002f954e}
+    Return
+    1 & h:: ; 刷新host
+    Run, cmd.exe
+    Sleep, 5000
+    ControlSendRaw, ,ipconfig /flushdns , ahk_exe cmd.exe
+    Sleep, 500
+    ControlSend, , {Enter} , ahk_exe cmd.exe
+    Sleep, 500
+    Process, Close, cmd.exe
+    Return
+    ; F2--------------------------------------------------
+    2::2
+    ; F3--------------------------------------------------
+    3::3
+    ; F4--------------------------------------------------
+    4::4
+    ; F5--------------------------------------------------
+    5::5
+    5 & b::Run https://bilibili.com
+    5 & g::Run https://github.com
+    5 & z::Run https://zhihu.com
+#IfWinActive

@@ -1,15 +1,11 @@
 ; ------------------------------默认变量------------------------------
-f_1 := "D:/2Scripts/AHK/shortcut/F1/"
-f_2 := "D:/2Scripts/AHK/shortcut/F2/"
-f_3 := "D:/2Scripts/AHK/shortcut/F3/"
-f_4 := "D:/2Scripts/AHK/shortcut/F4/"
 ; ------------------------------一些全局快捷键------------------------------
 ; 切换模式------------------------------
 ^!1::
-    Run D:/2Scripts/AHK/raw.ahk
+    Run *RunAs .\raw.ahk
 ExitApp
 Return
-^!0::Run D:/2scripts/AHK/game.ahk
+^!0::Run .\game.ahk
 ; 重新加载脚本------------------------------
 ^!R::Reload
 ; 热字串------------------------------
@@ -154,9 +150,6 @@ return
     1 & b:: ; 回收站
     Run ::{645ff040-5081-101b-9f08-00aa002f954e}
     Return
-    1 & c::Run %f_1%ClashForWindows
-    1 & f::Run %f_1%FastGitHub
-    1 & g::Run %f_1%gaoman
     1 & h:: ; 刷新host
     Run, cmd.exe
     Sleep, 5000
@@ -166,34 +159,12 @@ return
     Sleep, 500
     Process, Close, cmd.exe
     Return
-    1 & s::Run %f_1%steamcommunity
     ; F2--------------------------------------------------
     2::2
-    2 & a::Run %f_2%AI
-    2 & b::Run %f_2%Billfish
-    2 & e::Run %f_2%edge
-    2 & f::Run %f_2%firefox
-    2 & g::Run %f_2%google
-    2 & j::Run %f_2%Joplin
-    2 & o::Run %f_2%oulu
-    2 & p::Run %f_2%ps
-    2 & q::Run %f_2%QQ
-    2 & v::Run %f_2%vscode
-    2 & w::Run %f_2%wechat
     ; F3--------------------------------------------------
     3::3
-    3 & l::Run %f_3%leidian
-    3 & s::Run %f_3%steam
-    3 & w::Run %f_3%wangyi
     ; F4--------------------------------------------------
     4::4
-    4 & a::Run %f_4%ali
-    4 & b::Run %f_4%baiduyun
-    4 & e::Run %f_4%Everything
-    4 & g::Run %f_4%geshigongchang
-    4 & m::Run %f_4%Motrix
-    4 & p::Run %f_4%pr
-    4 & x::Run %f_4%xunlei
     ; F5--------------------------------------------------
     5::5
     5 & b::Run https://bilibili.com
