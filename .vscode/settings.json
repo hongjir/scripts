@@ -13,5 +13,7 @@
         "Snipaste",
         "Taskmgr",
         "WINWORD"
-    ]
+    ],
+    "editor.fontFamily": "FiraCode NF, Consolas, 'Courier New', monospace",
+    "errorLens.fontWeight": "900"
 }
