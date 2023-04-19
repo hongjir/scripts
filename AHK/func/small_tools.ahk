@@ -5,23 +5,23 @@ SetBatchLines, -1
 SetWorkingDir, %A_ScriptDir%
 #Include, <mouse>
 
-; ç½®é¡¶å½“å‰çª—å£--------------------------------
+; ÖÃ¶¥µ±Ç°´°¿Ú--------------------------------
 #`::
-WinGetActiveTitle, title
-WinSet, AlwaysOnTop, , %title%
-ToolTip, %title%å·²ç½®é¡¶
-Sleep, 1000
-ToolTip
+    WinGetActiveTitle, title
+    WinSet, AlwaysOnTop, , %title%
+    ToolTip, %title%ÒÑÖÃ¶¥
+    Sleep, 1000
+    ToolTip
 Return
 
-; é¼ æ ‡åœ¨ä»»åŠ¡æ æ—¶æ»šè½®æ§åˆ¶éŸ³é‡------------------------------
+; Êó±êÔÚÈÎÎñÀ¸Ê±¹öÂÖ¿ØÖÆÒôÁ¿------------------------------
 #If MouseIsOver("ahk_class Shell_TrayWnd")
-WheelUp::Send {Volume_Up}
-WheelDown::Send {Volume_Down}
-MButton::Send {Volume_Mute}
+    WheelUp::Send {Volume_Up}
+    WheelDown::Send {Volume_Down}
+    MButton::Send {Volume_Mute}
 #If
 
-; ------------------------------å–è‰²å™¨------------------------------
+; ------------------------------È¡É«Æ÷------------------------------
 #c::
     Gui +AlwaysOnTop -Caption +ToolWindow
     Gui, add, Text, vMyText, "what"

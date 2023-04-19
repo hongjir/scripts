@@ -38,3 +38,8 @@ e::
         Run https://cn.bing.com/search?q=%web%
 Return
 #if
+
+#if GetKeyState("Capslock", "P") and flag==1
+2::SendInput, {Blind}{F2}
+5::SendInput, {Blind}{F5}
+#if

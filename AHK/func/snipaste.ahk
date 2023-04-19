@@ -3,23 +3,6 @@
 
 displayNum := 0
 visibleState := true
-!a::
-    Clipboard := ""
-    Send, !a
-    ClipWait,,1
-    If DllCall("IsClipboardFormatAvailable", "UInt", 2){
-        if DllCall("OpenClipboard", "uint", 0) {
-            hBitmap := DllCall("GetClipboardData", "uint", 2)
-            DllCall("CloseClipboard")
-        }
-        displayImg(hBitmap)
-    }
-    if DllCall("IsClipboardFormatAvailable", "UInt", 15){
-        imgFile := Clipboard
-        if(hBitmap := LoadPicture(imgFile))
-            displayImg(hBitmap)
-    }
-Return
 F3::
     pasteToScreen(){
         if DllCall("IsClipboardFormatAvailable", "UInt", 1)
@@ -79,6 +62,7 @@ F3::
         width%id% := ""
         height%id% := ""
         Gui, Destroy
+        ExitApp
     }
 
     #IfWinActive pasteToScreen

@@ -26,7 +26,6 @@ waitAppear(screenExe, imgPath, ByRef x, ByRef y, SearchDirection, max=0, gap=0, 
             }
         }
         Gdip_DisposeImage(hscreen)
-        MsgBox, , ,1 ,
         Sleep, % gap*1000
     }
     Until pick==1
@@ -34,7 +33,6 @@ waitAppear(screenExe, imgPath, ByRef x, ByRef y, SearchDirection, max=0, gap=0, 
     Gdip_DisposeImage(needle)
     Gdip_Shutdown(gdipToken)
     Sleep, % ta*1000
-    MsgBox, , ,111 ,
 }
 
 cc(x, y, program){

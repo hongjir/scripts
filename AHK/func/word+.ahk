@@ -6,23 +6,23 @@ SetWorkingDir, %A_ScriptDir%
 
 #IfWinActive ahk_class OpusApp
     Up::
-        KeyWait, Up, T0.5
+        KeyWait, Up, T0.3
         If (ErrorLevel==1){
             Send, ^+{+}
             KeyWait, Up
             Send, ^+{+}
         }
         Else
-            Send, Up
+            Send, {Up}
     Return
     Down::
-        KeyWait, Down, T0.5
+        KeyWait, Down, T0.3
         If (ErrorLevel==1){
-            Send, ^{+}
+            Send, ^{=}
             KeyWait, Down
-            Send, ^{+}
+            Send, ^{=}
         }
         Else
-            Send, Down
+            Send, {Down}
     Return
 #IfWinActive

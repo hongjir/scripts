@@ -3,21 +3,17 @@ script:="D:\2scripts\script\"
 workspace:="D:\1workspace\"
 boxHeight=400
 boxWidth=400
-Gui, New,, BOX!
+Gui, New,, TOOLS
 Gui, -SysMenu Caption AlwaysOnTop
-IfWinActive, ahk_exe coodesker-x64.exe
-    Gui, Add, Tab3, X0 Y0 H%boxHeight% W%boxWidth%, 启动|工具|文件|脚本|
-IfWinActive, ahk_exe Code.exe
-    Gui, Add, Tab3, X0 Y0 H%boxHeight% W%boxWidth%, 启动|工具||文件|脚本|
+Gui, Add, Tab3, X0 Y0 H%boxHeight% W%boxWidth%, 启动|工具|文件|脚本|
 ; 启动项目--------------------------------------------------------------------
 ; Gui, Add, Text, border center BackgroundTrans X35 Y35 H40 W60 gopen, 下载
 
 Gui, Add, Picture,x0 y0 H%boxHeight% W%boxWidth% +0x4000000, bac.png
-Gui, add, GroupBox,x0 y0 w%boxWidth% h%boxHeight%, test
 Gui, Add, Button, -Default X35 Y35 H50 W60 gopen , 下载
 Gui, Add, Button, -Default X+10 H50 W60 gopen, 阿里云
 Gui, Add, Button, -Default X+10 H50 W60 gopen, 百度云
-Gui, Add, Button, -Default X+10 H50 W60 gopen,迅雷
+Gui, Add, Button, -Default X+10 H50 W60 gopen, 迅雷
 Gui, Add, Button, -Default X+10 H50 W60 gopen, Motrix
 
 Gui, Add, Button, -Default X35 Y+10 H50 W60 gopen, Billfish
@@ -52,63 +48,75 @@ Gui, Add, Button, -Default X+10 H50 W60 gadminOpen, 任务管理器
 
 ; 一些工具------------------------------------------------------------------------------------------------
 Gui, tab, 2
-Gui, Add, Picture,x0 y0 H%boxHeight% W%boxWidth% +0x4000000, bac.png
+Gui, Add, Button, -Default X35 Y35 H50 W60 g截图, 截图
+Gui, Add, Button, -Default X+10 H50 W60 gocr, 文字识别
+Gui, Add, Button, -Default X+10 H50 W60 ,
+Gui, Add, Button, -Default X+10 H50 W60 ,
+Gui, Add, Button, -Default X+10 H50 W60 ,
+; 手游模拟器
+IfWinActive, ahk_exe dnplayer.exe
+{
+    Gui, Add, Button, -Default X35 Y+10 H50 W60 ggame, 挂机！
+
+}
 
 ; 桌面
-#IfWinActive, ahk_exe Code.exe
+IfWinActive, ahk_exe Code.exe
+{
 
-#IfWinActive
+}
 
 ; vscode
-#IfWinActive, ahk_exe Code.exe
+IfWinActive, ahk_exe Code.exe
+{
 
-#IfWinActive
-
+}
 ; edge
-#IfWinActive, ahk_exe Code.exe
+IfWinActive, ahk_exe msedge.exe
+{
 
-#IfWinActive
-
+}
 ; ps
-#IfWinActive, ahk_exe Code.exe
+IfWinActive, ahk_exe Photoshop.exe
+{
 
-#IfWinActive
-
+}
 ; pr
-#IfWinActive, ahk_exe Code.exe
+IfWinActive, ahk_exe Adobe Premiere Pro.exe
+{
 
-#IfWinActive
-
+}
 ; excel
-#IfWinActive, ahk_exe Code.exe
+IfWinActive, ahk_exe EXCEL.EXE
+{
 
-#IfWinActive
-
+}
 ; word
-#IfWinActive, ahk_exe Code.exe
+IfWinActive, ahk_exe WINWORD.EXE
+{
 
-#IfWinActive
-
+}
 ; ppt
-#IfWinActive, ahk_exe Code.exe
+IfWinActive, ahk_exe POWERPNT.EXE
+{
 
-#IfWinActive
-
+}
 ; terminal
-#IfWinActive, ahk_exe Code.exe
+IfWinActive, ahk_exe Code.exe
+{
 
-#IfWinActive
-
+}
 ; 资源管理器
-#IfWinActive, ahk_class CabinetWClass
+IfWinActive, ahk_class CabinetWClass
+{
 
-#IfWinActive
-
+}
 ; 微信
-#IfWinActive, ahk_exe Code.exe
+IfWinActive, ahk_exe WeChat.exe
+{
 
-#IfWinActive
-
+}
+Gui, Add, Picture,x0 y0 H%boxHeight% W%boxWidth% +0x4000000, bac.png
 ; 文件夹！------------------------------------------------------------------------------------------------
 Gui, tab, 3
 folders := GetSubFolder("D:")
@@ -144,6 +152,8 @@ Gui, Add, Button, -Default X+10 H50 W60, 注册表编辑器
 Gui, Add, Picture,x0 y0 H%boxHeight% W%boxWidth% +0x4000000, bac.png
 
 showGui(boxWidth, boxHeight)
+
+#Include, ./func/snipaste.ahk
 Return
 ; 函数区------------------------------------------------------------------------------------------------
 ; 获得子文件夹名称
@@ -235,7 +245,7 @@ pre_folder:
     SplitPath, folder, , pre_f
     folders := GetSubFolder(pre_f)
     GuiControl, , folder,|%pre_f%|%folders%
-    ; 更新列表
+; 更新列表
 renewList:
     GuiControlGet, folder, , folder
     If (!FileExist(folder))
@@ -273,6 +283,33 @@ work:
     Run %workspace%\doing
 Return
 
+; 工具-------------------------------------
+; 截图贴图
+截图:
+    Clipboard := ""
+    Send, ^{PrintScreen}
+    Gui, hide
+    ClipWait,,1
+    If DllCall("IsClipboardFormatAvailable", "UInt", 2){
+        if DllCall("OpenClipboard", "uint", 0) {
+            hBitmap := DllCall("GetClipboardData", "uint", 2)
+            DllCall("CloseClipboard")
+        }
+        displayImg(hBitmap)
+    }
+    if DllCall("IsClipboardFormatAvailable", "UInt", 15){
+        imgFile := Clipboard
+        if(hBitmap := LoadPicture(imgFile))
+            displayImg(hBitmap)
+    }
+Return
+ocr:
+    SendInput, {F4}
+    Gui, Hide
+ExitApp
+game:
+    Run, D:\2scripts\AHK\blue.ahk
+ExitApp
 ; 脚本
 dns:
     Run, %script%dns
