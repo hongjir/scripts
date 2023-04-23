@@ -1,35 +1,34 @@
-; ------------------------------Ä¬ÈÏ±äÁ¿------------------------------
-flag=1
+; ------------------------------é»˜è®¤å˜é‡------------------------------
+flag:=1
 ; ------------------------------include------------------------------
-#Include, ./func/small_tools.ahk
-#Include, ./func/quickComplete.ahk
-#Include, ./func/capslock+.ahk
-#Include, ./func/apps_quick_func.ahk
-; ------------------------------Ò»Ğ©È«¾Ö¿ì½İ¼ü------------------------------
-; ÇĞ»»Ä£Ê½------------------------------
+#Include ./func/small_tools.ahk
+#Include ./func/quickComplete.ahk
+#Include ./func/capslock+.ahk
+#Include ./func/apps_quick_func.ahk
+; ------------------------------ä¸€äº›å…¨å±€å¿«æ·é”®------------------------------
+; åˆ‡æ¢æ¨¡å¼------------------------------
 ^!1::
     flag:=!flag
 Return
-#IF flag==1
-    Esc::`
-#IF
-#IfWinActive ahk_exe blender.exe
+#If flag==1
+    Esc::Send(`)
+#If
+    #IfWinActive ahk_exe blender.exe
     RButton::RButton
 #IfWinActive
-; ÖØĞÂ¼ÓÔØ½Å±¾------------------------------
-
+; é‡æ–°åŠ è½½è„šæœ¬------------------------------
 ^!R::Reload
-; »½³ö´°¿Ú------------------------------
-#IfWinNotActive, ahk_exe blender.exe
-    RButton::
-        KeyWait, RButton, T0.2
-        If (ErrorLevel==1){
-            Run *RunAs box.ahk
-        }
-        Else
-            Send, {RButton}
-    Return
+; å”¤å‡ºçª—å£------------------------------
+#IfWinNotActive ahk_exe blender.exe
+RButton::
+    KeyWait, RButton, T0.2
+    If (ErrorLevel==1){
+        Run *RunAs box.ahk
+    }
+    Else
+        Send, {RButton}
+Return
 #If
-; ------------------------------CAPSlock plus------------------------------
+    ; ------------------------------CAPSlock plus------------------------------
 ^CapsLock::CapsLock
 CapsLock::Esc
